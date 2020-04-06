@@ -1,0 +1,23 @@
+ion-content{
+  font-family : Lato-Regular;
+  --ion-font-family : Lato-Regular;
+}
+
+.logo {
+    max-width: 150px;
+    display: block;
+    margin : 0 auto;
+    padding : 16px;
+}
+
+.iframe-container {
+  width: 100%;
+  height: 625px;
+  margin-top: 20px;
+
+  iframe {
+      height: 100%;
+      width: 100%;
+      border: none;
+  }
+}

@@ -1,0 +1,49 @@
+ion-slide {
+    height: 92vh;
+    flex-direction: column-reverse;
+    
+}
+
+.wt-content{
+    position: absolute;
+}
+
+.wt-img {
+    img {
+        max-width: 80%;
+        height: auto;
+    }
+}
+
+.wt-title{
+    padding : 16px;
+    font-weight: bolder;
+    color : #7e7e7e;
+    font-size: 16px;
+}
+
+.wt-step{
+    h3 {
+        font-size: 16px;
+        font-weight: bolder;
+    }
+    margin-top: 50px;
+    padding : 16px;
+    color : #7e7e7e;
+    font-size : 16px;
+
+    ion-button {
+        text-transform: capitalize;
+    }
+}
+
+ion-footer {
+    ion-toolbar {
+        --background: transparent;
+        height: 8vh;
+
+        ion-button {
+            text-transform: capitalize;
+        }
+    }
+}

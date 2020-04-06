@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Pusat Bantuan</ion-title>
+    <ion-buttons>
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <iframe [src]="trusted_url" target="_parent" (load)="onLoad()" (error)="onError()" allowfullscreen></iframe>
+</ion-content>

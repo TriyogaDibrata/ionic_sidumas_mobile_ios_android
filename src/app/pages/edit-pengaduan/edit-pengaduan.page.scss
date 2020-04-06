@@ -1,0 +1,16 @@
+ion-content{
+  --background : #eeeeee;
+  font-family : Lato-Regular;
+  --ion-font-family : Lato-Regular;
+}
+
+.block {
+    .deleteIcon {
+      position: absolute !important;
+      color: #ffffff !important;
+      margin-left: 85% !important;
+    }
+    .deleteIcon:before {
+      font-size: 40px !important;
+    }
+}

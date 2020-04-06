@@ -1,0 +1,43 @@
+ion-content{
+  font-family : Lato-Regular;
+  --ion-font-family : Lato-Regular;
+}
+
+.notif{
+  border-bottom: 1px solid #EEEEEE;
+}
+.notif-date{
+  padding: 15px 5px;
+  color: #949292;
+  text-align: center;
+}
+.notif-label{
+  padding: 15px 5px;
+}
+.notif-divider{
+  color: #252424;
+  background-color: #EEEEEE;
+  font-weight: bold;
+  padding: 10px;
+}
+
+.no-padding-top{
+  padding-top: 0 !important;
+}
+.no-padding-bottom{
+  padding-bottom: 0 !important;
+}
+.no-data{
+  text-align: center;
+  color: rgba(0,0,0,0.3);
+  font-size: 18px;
+  padding: 40px 15px 15px;
+}
+ion-refresher{
+  background: #ffffff;
+}
+ion-text.notif-name{
+  font-weight: bold;
+  display: block;
+  font-size: 0.7rem;
+}

@@ -1,0 +1,141 @@
+ion-content {
+    --background : var(--ion-color-light); 
+    font-family : Lato-Regular;
+    --ion-font-family : Lato-Regular;
+}
+
+.content-wrapper {
+    background: #ffffff;
+
+    ion-avatar {
+        width: 62px;
+        height: 62px;
+        padding: 14px;
+    }
+}
+
+.name-wrapper {
+    margin-top: 5px;
+    font-size: 0.8rem;
+}
+
+.category-wrapper {
+    color : #ffffff;
+    font-size: 0.8rem;
+    font-weight: bold;
+
+    ion-row {
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+}
+
+.main-content-wrapper {
+
+    .title {
+        font-size: 1rem;
+        font-weight: bolder;
+    }
+
+    .main{
+        font-size: 0.8rem;
+    }
+}
+
+.footer-wrapper {
+    background: #ffffff;
+    color : var(--ion-color-medium);
+
+    ion-icon {
+        font-size: 1.2rem;
+    }
+
+    span {
+        font-size: 0.7rem;
+    }
+
+    ion-badge {
+        font-size: 0.5rem;
+    }
+}
+
+ion-item {
+    --background : var(--ion-color-light);
+}
+
+.message-input {
+    width: 100%;
+    border: 1px solid var(--ion-color-medium);
+    border-radius: 10px;
+    background: #fff;
+    padding-left: 10px;
+    padding-right: 10px;
+    margin-bottom : 10px;
+  }
+
+  .msg-btn {
+    --padding-start: 0.5em;
+    --padding-end: 0.5em;
+  }
+
+  .comment-wrapper{
+      ion-avatar {
+          object-fit: scale-down;
+      }
+
+      .user-name {
+          margin-top : 8px;
+      }
+
+  }
+
+  b.name {
+    font-size: .7rem;
+  }
+
+  .date {
+      font-size: .6rem;
+      color: #706e6e;
+  }
+
+  .category-tag {
+      color : #6083f5;
+      font-size: .8rem;
+  }
+
+  .info-badge{
+      background-color : #7044ff;
+      color : #ffffff;
+  }
+
+  .image{
+      img{
+          width: 100%;
+          height: 250px;
+          object-fit: scale-down;
+      }
+  }
+
+  .komentars {
+      min-height: 100%;
+      width: 100%;
+      position: relative;
+      overflow: hidden;
+      margin: 0 auto;
+      margin-bottom: 93px;
+  }
+
+  .toolbar-comment{
+    position: fixed;
+    bottom: 0;
+    border-top : 2px solid #eeeeee;
+  }
+
+  .info-tanggapan{
+    font-style: italic;
+    font-weight: normal;
+    font-size: 0.7em;
+  }
+  .info-tanggapan ion-row, .info-tanggapan ion-col{
+    padding-top: 0 !important;
+  }

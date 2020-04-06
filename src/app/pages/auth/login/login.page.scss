@@ -1,0 +1,30 @@
+ion-content {
+    font-family: Lato-Regular !important;
+    --ion-font-family : Lato-Regular !important;
+    --background : var(--ion-color-danger);
+    --color : var(--ion-color-light);
+}
+
+.logo {
+    margin-top: 10%;
+    img{
+        width: 40%;
+        display: block;
+        margin : auto;
+    }
+}
+
+ion-card {
+    --background : var(--ion-color-light);
+    border-radius: 10px;    
+}
+
+ion-card-content {
+    ion-button {
+        text-transform: capitalize;
+    }
+}
+
+.btn-group {
+    margin-top: 20px;
+}

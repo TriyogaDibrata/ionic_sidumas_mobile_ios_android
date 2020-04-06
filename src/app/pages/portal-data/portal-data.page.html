@@ -1,0 +1,12 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>{{ page_title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <iframe [src]="trusted_site" target="_parent" (load)="onLoad()" (error)="onError()" allowfullscreen></iframe>
+</ion-content>

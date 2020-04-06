@@ -1,0 +1,35 @@
+ion-content {
+    font-family: Lato-Regular !important;
+    --ion-font-family : Lato-Regular !important;
+    --background : var(--ion-color-danger);
+}
+
+.btn-back {
+    text-transform: capitalize;
+}
+
+ion-card {
+    --background : var(--ion-color-light);
+    border-radius: 10px;
+}
+
+ion-card-content {
+    ion-button {
+        text-transform: capitalize;
+    }
+}
+
+.line {
+    width: 100%;
+    border: solid 2px #a3a3a3;
+    margin-top: 10px;
+}
+
+ion-item {
+    margin-top : 20px;
+    --color : var(--ion-color-dark);
+    --border-color : var(--ion-color-medium);
+    --color-activated : var(--ion-color-dark);
+    --highlight-color-focused : var(--ion-color-dark);
+    --highlight-color-invalid : var(--ion-color-danger);
+}

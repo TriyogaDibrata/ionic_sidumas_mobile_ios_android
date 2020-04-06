@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>ApplicationProperties</key>
+	<dict>
+		<key>ApplicationPath</key>
+		<string>Applications/Sidumas Badung.app</string>
+		<key>CFBundleIdentifier</key>
+		<string>com.badungkab.lapor-sidumas</string>
+		<key>CFBundleShortVersionString</key>
+		<string>1.0.8</string>
+		<key>CFBundleVersion</key>
+		<string>1.0.8</string>
+		<key>SigningIdentity</key>
+		<string>Apple Development: Triyoga dibrata (T2BTMMR48X)</string>
+		<key>Team</key>
+		<string>25UT5B6S4N</string>
+	</dict>
+	<key>ArchiveVersion</key>
+	<integer>2</integer>
+	<key>CreationDate</key>
+	<date>2020-04-02T05:36:14Z</date>
+	<key>Name</key>
+	<string>Sidumas Badung</string>
+	<key>SchemeName</key>
+	<string>Sidumas Badung</string>
+</dict>
+</plist>

@@ -1,0 +1,256 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>Pengaduan</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content #content class="ion-no-padding">
+  <ion-refresher pull-max="60" slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-down" pullingText="Pull to refresh" refreshingSpinner="crescent"
+      refreshingText="Refreshing..."></ion-refresher-content>
+  </ion-refresher>
+  <ion-row class="ion-justify-content-center ion-no-padding" *ngIf="data">
+    <ion-col size="12" size-md="6" size-xl="6" class="ion-no-padding">
+      <div class="info-badge" *ngIf="statusShow === 1" [hidden]="hide_info">
+        <ion-row>
+          <ion-col size="11">
+            Pengaduan ini dibuat oleh user yang belum terverifikasi
+          </ion-col>
+          <ion-col size="1">
+            <ion-icon class="mt10" name="close-circle" (click)="closeTag()"></ion-icon>
+          </ion-col>
+        </ion-row>
+      </div>
+      <div class="content-wrapper">
+        <ion-row>
+          <ion-col size="2">
+            <ion-avatar>
+              <img *ngIf="data.avatar" [src]="data.avatar" />
+              <img *ngIf="!data.avatar" src="https://sidumas.badungkab.go.id/assets/frontpage/anon_user.png" />
+            </ion-avatar>
+          </ion-col>
+          <ion-col size="8">
+            <ion-row class="name-wrapper">
+              <ion-col size="12" class="mt3">
+                <ion-text class="bold text1">
+                  {{ data.pelapor }}
+                  <br />
+                  <ion-text color="medium" class="text07"> ID : #{{ data.no_tiket }} | {{ converTime(data.tanggal) }}
+                  </ion-text>
+                </ion-text>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+          <ion-col size="2">
+            <ion-button fill="clear" color="medium" (click)="presentAlertMultipleButtons(sharedService.getUserCache().id, data)">
+              <ion-icon name="more" slot="icon-only">
+              </ion-icon>
+            </ion-button>
+          </ion-col>
+        </ion-row>
+
+        <div class="image">
+          <ion-slides pager="true" [options]="slideOpts" *ngIf="files" scrollbarr="true" pager="true">
+            <ion-slide *ngFor="let file of files">
+              <img [src]="file.fullpath">
+            </ion-slide>
+          </ion-slides>
+        </div>
+
+        <div class="category-wrapper" [style.background]="data.color">
+          <ion-row class="ion-no-padding">
+            <ion-col class="ion-text-center">
+              <ion-text>Status Pengaduan : {{  data.status_pengaduan }}</ion-text>
+            </ion-col>
+          </ion-row>
+        </div>
+        <div *ngIf="infotanggapan!=''" class="category-wrapper info-tanggapan" [style.background]="data.color">
+          <ion-row class="ion-no-padding">
+            <ion-col class="ion-text-center">
+              <ion-text>"{{ infotanggapan }}"</ion-text>
+            </ion-col>
+          </ion-row>
+        </div>
+
+        <div class="main-content-wrapper ion-padding">
+          <div class="category-tag ion-text-right">#{{ data.kategori_name }}</div>
+          <div class="title">
+            {{ data.topik }}
+          </div>
+          <div class="main mt10">
+            {{ data.uraian }}
+          </div>
+        </div>
+
+        <div class="ion-text-right">
+          <ion-chip color="danger" class="ion-margin" (click)="checkLocation(data.koordinat_lat, data.koordinat_lng)">
+            <ion-icon name="map"></ion-icon>
+            <ion-label>Lokasi</ion-label>
+          </ion-chip>
+        </div>
+      </div>
+
+      <div class="footer-wrapper mt5">
+        <ion-row class="ion-text-center">
+          <ion-col (click)="displayTanggapans()">
+            <ion-row>
+              <ion-col size="12">
+                <ion-icon name="ios-swap" [color]="tanggapan_color"></ion-icon>
+                <ion-badge [color]="tanggapan_color">{{ count_tanggapans }}</ion-badge>
+              </ion-col>
+              <ion-col size="12">
+                <span>Tindakan</span>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+
+          <ion-col>
+            <ion-row>
+              <ion-col size="12" (click)="displayKomentars()">
+                <ion-icon name="ios-chatbubbles" [color]="komentar_color"></ion-icon>
+                <ion-badge [color]="komentar_color">{{ count_komentars }}</ion-badge>
+              </ion-col>
+              <ion-col size="12">
+                <span>Komentar</span>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+
+          <ion-col>
+            <ion-row>
+              <ion-col size="12" (click)="addVote(data)">
+                <ion-icon name="ios-thumbs-up" [color]="voteColor(data['is_like'])"></ion-icon>
+                <ion-badge [color]="voteColor(data['is_like'])">{{ count_dukungans }}</ion-badge>
+              </ion-col>
+              <ion-col size="12">
+                <span>Dukungan</span>
+              </ion-col>
+            </ion-row>
+          </ion-col>
+
+          <!-- <ion-col>
+            <ion-row>
+              <ion-col size="12" (click)="share(data)">
+                <ion-icon name="share"></ion-icon>
+              </ion-col>
+              <ion-col size="12">
+                <span>Bagikan</span>
+              </ion-col>
+            </ion-row>
+          </ion-col> -->
+        </ion-row>
+      </div>
+
+      <div class="content-wrapper">
+
+        <div class="komentars" [hidden]="!showTanggapans">
+          <div class="ion-text-center" *ngIf="!tanggapans">
+            <ion-spinner></ion-spinner>
+          </div>
+          <div class="ion-text-center text-padding" *ngIf="tanggapans.length < 1">
+            <ion-text>
+              <ion-icon name="ios-chatbubbles"></ion-icon> Belum Ada Komentar
+            </ion-text>
+          </div>
+          <ion-list *ngFor="let tanggapan of tanggapans">
+            <div class="comment-wrapper">
+              <ion-row>
+                <ion-col size="2">
+                  <ion-avatar class="ion-no-padding">
+                    <ion-img *ngIf="!tanggapan.avatar" src="assets/icon/ico-user.png"></ion-img>
+                    <ion-img *ngIf="tanggapan.avatar" [src]="tanggapan.avatar"></ion-img>
+                  </ion-avatar>
+                </ion-col>
+                <ion-col size="10" class="user-name">
+                  <b class="name">{{ tanggapan.nama }}</b>
+                  <br />
+                  <span>{{ tanggapan.tanggapan }}</span>
+                  <br />
+                  <ion-grid *ngIf="tanggapan.files.length > 0" class="ion-no-padding">
+                    <ion-row>
+                      <ion-col size="4" *ngFor="let tl_file of tanggapan.files">
+                        <ion-img (click)="imagePopover(tl_file.fullpath)" [src]="tl_file.fullpath"></ion-img>
+                      </ion-col>
+                    </ion-row>
+                  </ion-grid>
+                  <span class="date">{{ converTime(tanggapan.created_at) }}</span>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-list>
+        </div>
+
+        <div class="komentars" [hidden]="!showKomentars">
+          <div class="ion-text-center" *ngIf="!komentars">
+            <ion-spinner></ion-spinner>
+          </div>
+          <div class="ion-text-center text-padding" *ngIf="komentars.length < 1">
+            <ion-text>
+              <ion-icon name="ios-chatbubbles"></ion-icon> Belum Ada Komentar
+            </ion-text>
+          </div>
+          <ion-list *ngFor="let komentar of komentars">
+            <div class="comment-wrapper">
+              <ion-row>
+                <ion-col size="2">
+                  <ion-avatar class="ion-no-padding">
+                    <ion-img *ngIf="!komentar.avatar" src="assets/icon/ico-user.png"></ion-img>
+                    <ion-img *ngIf="komentar.avatar" [src]="komentar.avatar"></ion-img>
+                  </ion-avatar>
+                </ion-col>
+                <ion-col size="10" class="user-name">
+                  <b class="name">{{ komentar.nama }}</b>
+                  <br />
+                  <span>{{ komentar.komentar }}</span>
+                  <br />
+                  <span class="date">{{ converTime(komentar.created_at) }}</span>
+                </ion-col>
+              </ion-row>
+            </div>
+          </ion-list>
+        </div>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar class="toolbar-comment" color="light" *ngIf="data.user_id == sharedService.getUserCache().id" [hidden]="!showTanggapans">
+    <form [formGroup]="tanggapanForm" (ngSubmit)="addTanggapan(tanggapanForm)">
+      <ion-row class="ion-no-padding ion-align-items-center">
+        <ion-col size="10">
+          <ion-textarea class="message-input" rows="2" id="tanggapan_user" name="tanggapan_user"
+            formControlName="tanggapan_user" placeholder="Masukan Tanggapan">
+          </ion-textarea>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button expand="block" fill="clear" color="primary" [disabled]="!tanggapanForm.valid || disabled_submit"
+            class="msg-btn" type="Submit">
+            <ion-icon name="send" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-toolbar>
+
+  <ion-toolbar class="toolbar-comment" color="light" [hidden]="!showKomentars">
+    <form [formGroup]="commentForm" (ngSubmit)="addKomentar(commentForm)">
+      <ion-row class="ion-no-padding ion-align-items-center">
+        <ion-col size="10">
+          <ion-textarea class="message-input" rows="2" name="komentar_user" id="komentar_user"
+            formControlName="komentar_user" placeholder="Masukan Komentar" required>
+          </ion-textarea>
+        </ion-col>
+        <ion-col size="2">
+          <ion-button expand="block" fill="clear" color="primary" [disabled]="!commentForm.valid || disabled_submit"
+            class="msg-btn" type="submit">
+            <ion-icon name="send" slot="icon-only"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </form>
+  </ion-toolbar>
+</ion-footer>
